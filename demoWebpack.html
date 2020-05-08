@@ -1,0 +1,61 @@
+<!-- webpack v4 cheat sheat
+Webpack: là static module để gói các ứng dụng JavaScript . Nó nhận vào các module cùng với các dependencies và generate ra các static assets tương ứng.
+Nói chung thì nó dùng để quản lý các asset(js, css, image, font, vv) trong dự án của bạn.
+
+5 Concepts cơ bản trong webpack:
+- Entry: nó sẽ chỉ modules webpack nào nên sử dụng để bắt đầu xây dựng, có nghĩa là webpack sẽ tìm thằng này đầu tiên
+    module.exports = {
+       entry: './index.js'
+    }
+- Output: giống như với cái tên của nó, nó sẽ nói với webpack nơi sẽ tạo và đặt tên.
+    const path = require('path');
+    module.exports = {
+    entry: './index.js',     
+    output: {
+        path: path.resolve(__dirname, 'dist'), 
+        filename: 'js/bundle.js' 
+    }
+    } 
+-> KQ nó sẽ tạo folder dist làm nơi chứa và file bundle.js
+- Loader: bình thường webpack chỉ hiểu được javascript và json file. Loader nó sẽ cho phép webpack xữ lí file có định dạng khác và chuyển đổi chúng để sử dụng. Loader có 2 properties la`:
+ + text: nó xác định file nào nên chuyển đổi.
+ + use: nó xác định Loader nào nên sử dụng để chuyển đổi.
+    module.exports = {
+        module: {
+            rules: [
+                {
+                    text: /\.(js|jsx)$/,
+                    loader: 'babel-loader',
+                }
+            ]
+    }
+- Plugin: dùng để tối ưu hóa, quản lý asset, vv
+    const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
+    const webpack = require('webpack'); //to access built-in plugins
+    module.exports = {
+        plugins: [
+        new HtmlWebpackPlugin()
+        ]
+    };
+HtmlWebpackPlugin: đây là pluin nó sẽ tự động tạo một file html và mặc định nếu ko truyền vào nó sẽ tạo index.html trong folder dist
+- Mode: bằng cách chỉnh tham số value mode = development, production, none bạn có thể cho phép webpack chạy với môi trường nào. Mặc định nó là production
+module.exports = {
+    mode: 'production'
+}
+-->
+
+<!-- 
+Dành cho dự án lớn, dễ dàng phát triển, quản lý, customize.
+Tăng tốc độ project
+Phân chia các module và chỉ load khi thât sự cần
+Đóng gói tất cả file nguồn thành 1 file duy nhất. Nhờ vào loader mà nó có thể biên dịch các loại file khác nhau
+Biến các tài nguyên tĩnh(hình ảnh, css) trở thành 1 module
+Biến đổi các mã nguồn: js, less, sass thành js, css,... ES6 -> ES5 thông qua babel transpiler
+ReactJS:
+Đóng gói thành các module -> giải quyết vấn đê dc dẫn
+Browser k hiểu JSX(JSX -> chuyển đổi -> JS)
+Áp dụng CSS preprocessor để xây dựng stylesheet
+Ưu điểm: phân tách code, can thiệp sâu, cải thiện performance, đóng gói, chỉ load khi cần
+-->
+
+
